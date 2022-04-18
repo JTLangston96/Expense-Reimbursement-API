@@ -12,9 +12,10 @@ public class Expense {
 
     }
 
-    public Expense(int expenseId, int employeeId, String issuer, double amount) {
+    public Expense(int expenseId, int employeeId, String status, String issuer, double amount) {
         this.expenseId = expenseId;
         this.employeeId = employeeId;
+        this.status = status;
         this.issuer = issuer;
         this.amount = amount;
     }
