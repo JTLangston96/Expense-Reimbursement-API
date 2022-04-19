@@ -32,4 +32,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployee(Employee employee) {
         return employeeDAO.updateEmployee(employee);
     }
+
+    @Override
+    public boolean deleteEmployee(int id) {
+        return employeeDAO.deleteEmployee(id);
+    }
 }

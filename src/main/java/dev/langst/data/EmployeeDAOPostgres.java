@@ -136,6 +136,25 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
     @Override
     public boolean deleteEmployee(int id) {
+
+        try{
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "delete from employee where employee_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+
+            rs.getInt("employee_id");
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 }

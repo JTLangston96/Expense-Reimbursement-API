@@ -75,4 +75,15 @@ public class EmployeeDaoTests {
         Assertions.assertEquals(testFirstName, resultEmployee.getFirstName());
         Assertions.assertEquals(testLastname, resultEmployee.getLastName());
     }
+
+    @Test
+    void delete_employee(){
+        //Must create an employee first to delete
+        //May fail if the create employee method in EmployeeDAO fails
+        Employee zeus = new Employee("Thor", "Thunder");
+        Employee savedEmployee = employeeDAO.createEmployee(zeus);
+
+        boolean result = employeeDAO.deleteEmployee(savedEmployee.getEmployeeId());
+        Assertions.assertTrue(result);
+    }
 }

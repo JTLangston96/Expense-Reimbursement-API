@@ -64,7 +64,14 @@ public class Api {
         });
 
 //        DELETE /employees/190
+        api.delete("employees/{id}", context -> {
 
+            int id = Integer.parseInt(context.pathParam("id"));
+            employeeService.deleteEmployee(id);
+            context.status(200);
+            context.result("Employee with the ID: \"" + id + "\' has been successfully deleted.");
+
+        });
 
 
             //        EXPENSES          //
