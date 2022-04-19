@@ -5,7 +5,6 @@ public class Expense {
     private int expenseId;
     private int employeeId;
     private String status;
-    private String issuer;
     private double amount;
 
     public Expense() {
@@ -16,7 +15,6 @@ public class Expense {
         this.expenseId = expenseId;
         this.employeeId = employeeId;
         this.status = status;
-        this.issuer = issuer;
         this.amount = amount;
     }
 
@@ -42,14 +40,6 @@ public class Expense {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getIssuer() {
-        return issuer;
-    }
-
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
     }
 
     public double getAmount() {

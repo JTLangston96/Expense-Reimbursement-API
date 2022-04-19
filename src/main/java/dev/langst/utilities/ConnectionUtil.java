@@ -9,7 +9,7 @@ public class ConnectionUtil {
     public static Connection createConnection() {
 
         try {
-            Connection conn = DriverManager.getConnection(System.getenv("BANKDB"));
+            Connection conn = DriverManager.getConnection(System.getenv("EXPENSEDB"));
             return conn;
         }
         catch (SQLException e){
