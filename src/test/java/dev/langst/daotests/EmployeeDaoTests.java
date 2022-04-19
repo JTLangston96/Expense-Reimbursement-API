@@ -49,4 +49,30 @@ public class EmployeeDaoTests {
         Assertions.assertEquals(testId1, resultList.get(index1).getEmployeeId());
         Assertions.assertEquals(testId2, resultList.get(index2).getEmployeeId());
     }
+
+    @Test
+    void update_employee(){
+        //This employee should already be in the database.
+        //If not then change the hardcoded variables below
+        int testId = 6;
+        String testFirstName = "No Name";
+        String testLastname = "Also No Name";
+        Employee testEmployee = new Employee(testFirstName, testLastname);
+        testEmployee.setEmployeeId(testId);
+
+        Employee resultEmployee = employeeDAO.updateEmployee(testEmployee);
+
+        Assertions.assertEquals(testFirstName, resultEmployee.getFirstName());
+        Assertions.assertEquals(testLastname, resultEmployee.getLastName());
+
+        //Revert changes for next test run
+        testFirstName = "thor";
+        testLastname = "thunder";
+        testEmployee.setFirstName(testFirstName);
+        testEmployee.setLastName(testLastname);
+        employeeDAO.updateEmployee(testEmployee);
+
+        Assertions.assertEquals(testFirstName, resultEmployee.getFirstName());
+        Assertions.assertEquals(testLastname, resultEmployee.getLastName());
+    }
 }

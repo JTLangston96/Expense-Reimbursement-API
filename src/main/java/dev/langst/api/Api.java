@@ -24,16 +24,44 @@ public class Api {
             Employee employee = gson.fromJson(body, Employee.class);
             Employee savedEmployee = employeeService.createEmployee(employee);
             context.status(201);
-            context.result("Employee \"" + savedEmployee.getFirstName() + " " +
-                    savedEmployee.getLastName() + "\" has been created.");
+            context.result("Employee \"" + savedEmployee + "\" has been created.");
 
         });
 
 //        GET /employees
+        api.get("/employees", context -> {
+
+            Gson gson = new Gson();
+            String json = gson.toJson(employeeService.getAllEmployees());
+            context.status(200);
+            context.result(json);
+
+        });
 
 //        GET /employees/120
+        api.get("/employees/{id}", context -> {
+
+            Gson gson = new Gson();
+            int id = Integer.parseInt(context.pathParam("id"));
+            String json = gson.toJson(employeeService.getEmployeeById(id));
+            context.status(200);
+            context.result(json);
+
+        });
 
 //        PUT /employees/150
+        api.put("/employees/{id}", context -> {
+
+            Gson gson = new Gson();
+            String body = context.body();
+            Employee employee = gson.fromJson(body, Employee.class);
+            int id = Integer.parseInt(context.pathParam("id"));
+            employee.setEmployeeId(id);
+            Employee updatedEmployee = employeeService.updateEmployee(employee);
+            context.status(200);
+            context.result("The following employee has been updated: \"" + updatedEmployee + "\"");
+
+        });
 
 //        DELETE /employees/190
 

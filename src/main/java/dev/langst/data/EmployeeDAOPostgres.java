@@ -104,6 +104,33 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
     @Override
     public Employee updateEmployee(Employee employee) {
+
+        try{
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "update employee set first_name = ?, last_name = ? where employee_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, employee.getFirstName());
+            ps.setString(2, employee.getLastName());
+            ps.setInt(3, employee.getEmployeeId());
+
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+
+            int returnedId = rs.getInt("employee_id");
+            String firstName = rs.getString("first_name");
+            String lastname = rs.getString("last_name");
+
+            employee.setEmployeeId(returnedId);
+            employee.setFirstName(firstName);
+            employee.setLastName(lastname);
+
+            return employee;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
