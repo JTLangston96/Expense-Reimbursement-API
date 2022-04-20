@@ -11,8 +11,7 @@ public class Expense {
 
     }
 
-    public Expense(int expenseId, int employeeId, String status, String issuer, double amount) {
-        this.expenseId = expenseId;
+    public Expense(int employeeId, String status, double amount) {
         this.employeeId = employeeId;
         this.status = status;
         this.amount = amount;
@@ -48,5 +47,10 @@ public class Expense {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return this.expenseId + ": " + this.employeeId + " " + this.status + " " + this.amount;
     }
 }

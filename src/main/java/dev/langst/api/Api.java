@@ -2,14 +2,19 @@ package dev.langst.api;
 
 import com.google.gson.Gson;
 import dev.langst.data.EmployeeDAOPostgres;
+import dev.langst.data.ExpenseDAOPostgres;
 import dev.langst.entities.Employee;
+import dev.langst.entities.Expense;
 import dev.langst.services.EmployeeService;
 import dev.langst.services.EmployeeServiceImpl;
+import dev.langst.services.ExpenseService;
+import dev.langst.services.ExpenseServiceImpl;
 import io.javalin.Javalin;
 
 public class Api {
 
     public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOPostgres());
+    public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgres());
 
     public static void main(String[] args) {
         Javalin api = Javalin.create();
@@ -77,6 +82,17 @@ public class Api {
             //        EXPENSES          //
 
 //        POST /expenses
+        api.post("/expenses", context -> {
+
+            String body = context.body();
+            Gson gson = new Gson();
+            Expense expense = gson.fromJson(body, Expense.class);
+            Expense savedExpense = expenseService.createExpense(expense);
+            context.status(201);
+            context.result("The following expense \"" + savedExpense.toString() +
+                    "\" has been created and is now pending approval");
+
+        });
 
 //        GET /expenses
 
