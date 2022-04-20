@@ -5,6 +5,7 @@ import dev.langst.data.EmployeeDAOPostgres;
 import dev.langst.data.ExpenseDAOPostgres;
 import dev.langst.entities.Employee;
 import dev.langst.entities.Expense;
+import dev.langst.exceptions.NegativeExpense;
 import dev.langst.services.EmployeeService;
 import dev.langst.services.EmployeeServiceImpl;
 import dev.langst.services.ExpenseService;
@@ -83,14 +84,18 @@ public class Api {
 
 //        POST /expenses
         api.post("/expenses", context -> {
-
-            String body = context.body();
-            Gson gson = new Gson();
-            Expense expense = gson.fromJson(body, Expense.class);
-            Expense savedExpense = expenseService.createExpense(expense);
-            context.status(201);
-            context.result("The following expense \"" + savedExpense.toString() +
-                    "\" has been created and is now pending approval");
+            try{
+                String body = context.body();
+                Gson gson = new Gson();
+                Expense expense = gson.fromJson(body, Expense.class);
+                Expense savedExpense = expenseService.createExpense(expense);
+                context.status(201);
+                context.result("The following expense \"" + savedExpense.toString() +
+                        "\" has been created and is now pending approval");
+            }catch (NegativeExpense e){
+                context.status(400);
+                context.result(e.getMessage());
+            }
 
         });
 
