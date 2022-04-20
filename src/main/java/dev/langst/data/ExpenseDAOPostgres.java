@@ -4,6 +4,7 @@ import dev.langst.entities.Expense;
 import dev.langst.utilities.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseDAOPostgres implements ExpenseDAO {
@@ -42,7 +43,39 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     }
 
     @Override
-    public List<Expense> getExpenseByEmployeeId(int id) {
+    public List<Expense> getExpenseByEmployeeId(int employeeId) {
+        return null;
+    }
+
+    @Override
+    public List<Expense> getAllExpenses() {
+
+        try{
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "select * from expense";
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+
+            List<Expense> expenses = new ArrayList<>();
+            while(rs.next()){
+                int expenseId = rs.getInt("expense_id");
+                int employeeId = rs.getInt("employee_id");
+                String status = rs.getString("status");
+                double amount = rs.getDouble("amount");
+
+                Expense expense = new Expense(employeeId, status, amount);
+                expense.setExpenseId(expenseId);
+                expenses.add(expense);
+            }
+
+            return expenses;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

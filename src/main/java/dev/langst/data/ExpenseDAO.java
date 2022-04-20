@@ -10,7 +10,9 @@ public interface ExpenseDAO {
 
     Expense getExpenseById(int id);
 
-    List<Expense> getExpenseByEmployeeId(int id);
+    List<Expense> getExpenseByEmployeeId(int employeeId);
+
+    List<Expense> getAllExpenses();
 
     Expense updateExpense(Expense expense);
 

@@ -100,6 +100,14 @@ public class Api {
         });
 
 //        GET /expenses
+        api.get("/expenses", context -> {
+
+            Gson gson = new Gson();
+            String json = gson.toJson(expenseService.getAllExpenses());
+            context.status(200);
+            context.result(json);
+
+        });
 
 //        GET /expenses?status=pending
 

@@ -6,6 +6,8 @@ import dev.langst.entities.Expense;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class ExpenseDaoTests {
 
     static ExpenseDAO expenseDAO = new ExpenseDAOPostgres();
@@ -21,6 +23,17 @@ public class ExpenseDaoTests {
         Expense newExpense = new Expense(employeeTestId, status, amount);
         Expense savedExpense = expenseDAO.createExpense(newExpense);
         Assertions.assertNotEquals(0, savedExpense.getExpenseId());
+    }
+
+    @Test
+    void get_all_expenses_test(){
+
+        int testIndex = 7;
+        int testEmployeeId = 1;
+
+        List<Expense> expenses = expenseDAO.getAllExpenses();
+
+        Assertions.assertEquals(testEmployeeId, expenses.get(testIndex).getEmployeeId());
     }
 
 }

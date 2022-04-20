@@ -4,6 +4,8 @@ import dev.langst.data.ExpenseDAO;
 import dev.langst.entities.Expense;
 import dev.langst.exceptions.NegativeExpense;
 
+import java.util.List;
+
 public class ExpenseServiceImpl implements ExpenseService{
 
     private ExpenseDAO expenseDAO;
@@ -19,5 +21,10 @@ public class ExpenseServiceImpl implements ExpenseService{
         }
         expense.setStatus("PENDING");
         return expenseDAO.createExpense(expense);
+    }
+
+    @Override
+    public List<Expense> getAllExpenses() {
+        return expenseDAO.getAllExpenses();
     }
 }
