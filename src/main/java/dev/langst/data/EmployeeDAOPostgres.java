@@ -9,6 +9,9 @@ import java.util.List;
 
 public class EmployeeDAOPostgres implements EmployeeDAO {
 
+    private static final String EMPLOYEE_ID = "employee_id";
+    private static final String FIRST_NAME = "first_name";
+    private static final String LAST_NAME = "last_name";
 
     @Override
     public Employee createEmployee(Employee employee) {
@@ -25,7 +28,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
 
-            int generatedId = rs.getInt("employee_id");
+            int generatedId = rs.getInt(EMPLOYEE_ID);
             employee.setEmployeeId(generatedId);
 
             return employee;
@@ -53,9 +56,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
             Employee employee = new Employee();
 
-            int returnedId = rs.getInt("employee_id");
-            String firstName = rs.getString("first_name");
-            String lastname = rs.getString("last_name");
+            int returnedId = rs.getInt(EMPLOYEE_ID);
+            String firstName = rs.getString(FIRST_NAME);
+            String lastname = rs.getString(LAST_NAME);
 
             employee.setEmployeeId(returnedId);
             employee.setFirstName(firstName);
@@ -86,9 +89,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             while(rs.next()) {
                 Employee employee = new Employee();
 
-                int returnedId = rs.getInt("employee_id");
-                String firstName = rs.getString("first_name");
-                String lastname = rs.getString("last_name");
+                int returnedId = rs.getInt(EMPLOYEE_ID);
+                String firstName = rs.getString(FIRST_NAME);
+                String lastname = rs.getString(LAST_NAME);
 
                 employee.setEmployeeId(returnedId);
                 employee.setFirstName(firstName);
@@ -122,9 +125,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
 
-            int returnedId = rs.getInt("employee_id");
-            String firstName = rs.getString("first_name");
-            String lastname = rs.getString("last_name");
+            int returnedId = rs.getInt(EMPLOYEE_ID);
+            String firstName = rs.getString(FIRST_NAME);
+            String lastname = rs.getString(LAST_NAME);
 
             employee.setEmployeeId(returnedId);
             employee.setFirstName(firstName);
@@ -153,7 +156,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
 
-            rs.getInt("employee_id");
+            rs.getInt(EMPLOYEE_ID);
 
             return true;
 
