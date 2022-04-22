@@ -2,6 +2,8 @@ package dev.langst.data;
 
 import dev.langst.entities.Employee;
 import dev.langst.utilities.ConnectionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     private static final String EMPLOYEE_ID = "employee_id";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
+
+    private static final Logger logger = LogManager.getLogger(EmployeeDAOPostgres.class);
 
     @Override
     public Employee createEmployee(Employee employee) {
@@ -31,13 +35,16 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             int generatedId = rs.getInt(EMPLOYEE_ID);
             employee.setEmployeeId(generatedId);
 
+            logger.info("An employee has been created in the database with the ID: " + generatedId);
+
             return employee;
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            logger.error("There was an error with inserting employee \"" +
+                    employee.getFirstName() + " " + employee.getLastName() + "\" into the database.");
 
-        return null;
+            return null;
+        }
     }
 
     @Override
@@ -84,7 +91,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             ps.execute();
             ResultSet rs = ps.getResultSet();
 
-            List<Employee> employeeList = new ArrayList();
+            List<Employee> employeeList = new ArrayList<>();
 
             while(rs.next()) {
                 Employee employee = new Employee();

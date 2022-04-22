@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class EmployeeDaoTests {
-
+    
     static EmployeeDAO employeeDAO = new EmployeeDAOPostgres();
 
     @Test
@@ -84,5 +84,12 @@ public class EmployeeDaoTests {
 
         boolean result = employeeDAO.deleteEmployee(savedEmployee.getEmployeeId());
         Assertions.assertTrue(result);
+    }
+
+    @Test
+    void negative_create_employee_test(){
+        Employee zeus = new Employee();
+        Employee savedEmployee = employeeDAO.createEmployee(zeus);
+        Assertions.assertEquals(null, savedEmployee);
     }
 }
