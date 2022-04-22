@@ -12,9 +12,12 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "insert into employee values (default,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        String sql = "insert into employee values (default,?,?)";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
 
@@ -36,9 +39,12 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeById(int id) {
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "select * from employee where employee_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        String sql = "select * from employee where employee_id = ?";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
             ps.setInt(1, id);
 
             ps.execute();
@@ -67,9 +73,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public List<Employee> getAllEmployees() {
 
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "select * from employee";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "select * from employee";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
             ps.execute();
             ResultSet rs = ps.getResultSet();
@@ -102,9 +109,11 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public Employee updateEmployee(Employee employee) {
 
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "update employee set first_name = ?, last_name = ? where employee_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "update employee set first_name = ?, last_name = ? where employee_id = ?";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);){
+
             ps.setString(1, employee.getFirstName());
             ps.setString(2, employee.getLastName());
             ps.setInt(3, employee.getEmployeeId());
@@ -133,9 +142,11 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public boolean deleteEmployee(int id) {
 
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "delete from employee where employee_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "delete from employee where employee_id = ?";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
             ps.setInt(1, id);
 
             ps.execute();

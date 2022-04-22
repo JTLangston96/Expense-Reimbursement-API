@@ -18,6 +18,7 @@ public class Api {
     public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgres());
 
     public static void main(String[] args) {
+        
         Javalin api = Javalin.create();
 
             //        EMPLOYEES         //

@@ -13,9 +13,11 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public Expense createExpense(Expense expense) {
 
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "insert into expense values (default, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "insert into expense values (default, ?, ?, ?)";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
             ps.setInt(1, expense.getEmployeeId());
             ps.setString(2, expense.getStatus());
             ps.setDouble(3, expense.getAmount());
@@ -49,9 +51,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public List<Expense> getAllExpenses() {
 
-        try(Connection conn = ConnectionUtil.createConnection()){
-            String sql = "select * from expense";
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "select * from expense";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
             ps.execute();
             ResultSet rs = ps.getResultSet();
