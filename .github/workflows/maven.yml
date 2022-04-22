@@ -22,7 +22,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
-      - env:
-          EXPENSEDB: ${{ secrets.EXPENSEDB }}
       - name: Build with Maven
+        env:
+          EXPENSEDB: ${{ secrets.EXPENSEDB }}
         run: mvn -B package --file pom.xml
