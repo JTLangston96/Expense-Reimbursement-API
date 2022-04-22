@@ -13,8 +13,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public Expense createExpense(Expense expense) {
 
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "insert into expense values (default, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, expense.getEmployeeId());
@@ -50,8 +49,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public List<Expense> getAllExpenses() {
 
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "select * from expense";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 

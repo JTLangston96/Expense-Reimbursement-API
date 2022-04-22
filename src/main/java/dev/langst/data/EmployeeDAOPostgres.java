@@ -12,8 +12,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "insert into employee values (default,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, employee.getFirstName());
@@ -37,8 +36,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeById(int id) {
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "select * from employee where employee_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
@@ -69,8 +67,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public List<Employee> getAllEmployees() {
 
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "select * from employee";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -105,8 +102,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public Employee updateEmployee(Employee employee) {
 
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "update employee set first_name = ?, last_name = ? where employee_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, employee.getFirstName());
@@ -137,8 +133,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public boolean deleteEmployee(int id) {
 
-        try{
-            Connection conn = ConnectionUtil.createConnection();
+        try(Connection conn = ConnectionUtil.createConnection()){
             String sql = "delete from employee where employee_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
