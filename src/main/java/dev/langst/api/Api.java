@@ -22,7 +22,6 @@ public class Api {
         Javalin api = Javalin.create();
 
             //        EMPLOYEES         //
-        
 
 //        POST /employees
         api.post("/employees", context -> {
