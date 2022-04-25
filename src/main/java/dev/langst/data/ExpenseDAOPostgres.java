@@ -50,7 +50,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
     @Override
     public List<Expense> getExpenseByEmployeeId(int employeeId) {
-        return null;
+        return new ArrayList<Expense>();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
         } catch (SQLException e) {
             logger.error("Could not retrieve all Expenses from the database.");
-            return null;
+            return new ArrayList<Expense>();
         }
 
     }

@@ -111,7 +111,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
 
         } catch (SQLException e) {
             logger.error("There was an error in retrieving all the employees from the database.");
-            return null;
+            return new ArrayList<Employee>();
         }
 
     }
