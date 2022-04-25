@@ -35,13 +35,13 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             int generatedId = rs.getInt(EMPLOYEE_ID);
             employee.setEmployeeId(generatedId);
 
-            logger.info("An employee has been created in the database with the ID: %d", generatedId);
+            logger.info(String.format("An employee has been created in the database with the ID: %d", generatedId));
 
             return employee;
 
         } catch (SQLException e) {
-            logger.error("There was an error with inserting employee \"%s %s\" into the database",
-                    employee.getFirstName(), employee.getLastName());
+            logger.error(String.format("There was an error with inserting employee \"%s %s\" into the database",
+                    employee.getFirstName(), employee.getLastName()));
 
             return null;
         }
@@ -74,7 +74,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return employee;
 
         } catch (SQLException e) {
-            logger.error("There was an error retrieving employee with the ID \"%d\" from the database.", id);
+            logger.error(String.format("There was an error retrieving employee with the ID \"%d\" from the database.", id));
             return null;
         }
 
@@ -143,8 +143,8 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return employee;
 
         } catch (SQLException e) {
-            logger.error("There was an error updating the employee with ID \"%d\" from the database.",
-                    employee.getEmployeeId());
+            logger.error(String.format("There was an error updating the employee with ID \"%d\" from the database.",
+                    employee.getEmployeeId()));
             return null;
         }
 
@@ -169,7 +169,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return true;
 
         } catch (SQLException e) {
-            logger.error("Employee with the ID \"%d\" was not found in the database and could not be deleted.", id);
+            logger.error(String.format("Employee with the ID \"%d\" was not found in the database and could not be deleted.", id));
             return false;
         }
 

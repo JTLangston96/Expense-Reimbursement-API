@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean deleteEmployee(int id) {
         boolean foundEmployee = employeeDAO.deleteEmployee(id);
-        if(foundEmployee == false){
+        if(!foundEmployee){
             throw new ObjectNotFound();
         }
         else {

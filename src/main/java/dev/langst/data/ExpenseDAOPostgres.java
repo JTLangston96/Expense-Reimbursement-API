@@ -36,8 +36,8 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             return expense;
 
         } catch (SQLException e) {
-            logger.error("There was an error inserting an Expense for employee \"%d\" into the database.",
-                    expense.getEmployeeId());
+            logger.error(String.format("There was an error inserting an Expense for employee \"%d\" into the database.",
+                    expense.getEmployeeId()));
             return null;
         }
 
