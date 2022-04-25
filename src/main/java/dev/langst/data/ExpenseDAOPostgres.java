@@ -2,12 +2,16 @@ package dev.langst.data;
 
 import dev.langst.entities.Expense;
 import dev.langst.utilities.ConnectionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseDAOPostgres implements ExpenseDAO {
+
+    private static final Logger logger = LogManager.getLogger(ExpenseDAOPostgres.class);
 
 
     @Override
@@ -32,10 +36,11 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             return expense;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("There was an error inserting an Expense for employee \"%d\" into the database.",
+                    expense.getEmployeeId());
+            return null;
         }
 
-        return null;
     }
 
     @Override
@@ -74,10 +79,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             return expenses;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Could not retrieve all Expenses from the database.");
+            return null;
         }
 
-        return null;
     }
 
     @Override

@@ -74,10 +74,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return employee;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("There was an error retrieving employee with the ID \"%d\" from the database.", id);
+            return null;
         }
 
-        return null;
     }
 
     @Override
@@ -110,10 +110,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return employeeList;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("There was an error in retrieving all the employees from the database.");
+            return null;
         }
 
-        return null;
     }
 
     @Override
@@ -143,10 +143,11 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return employee;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("There was an error updating the employee with ID \"%d\" from the database.",
+                    employee.getEmployeeId());
+            return null;
         }
 
-        return null;
     }
 
     @Override
@@ -168,9 +169,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             return true;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Employee with the ID \"%d\" was not found in the database and could not be deleted.", id);
+            return false;
         }
 
-        return false;
     }
 }
