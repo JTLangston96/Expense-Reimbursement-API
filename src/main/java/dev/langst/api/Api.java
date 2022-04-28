@@ -13,6 +13,8 @@ import dev.langst.services.ExpenseService;
 import dev.langst.services.ExpenseServiceImpl;
 import io.javalin.Javalin;
 
+import java.util.Locale;
+
 public class Api {
 
     public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOPostgres());
@@ -117,18 +119,37 @@ public class Api {
         });
 
 //        GET /expenses
+//        GET /expenses?status=pending
         api.get("/expenses", context -> {
 
+            String statusCheck = context.queryParam("status");
             Gson gson = new Gson();
-            String json = gson.toJson(expenseService.getAllExpenses());
+            String json;
+            if(statusCheck == null) {
+                json = gson.toJson(expenseService.getAllExpenses());
+            }
+            else{
+                json = gson.toJson(expenseService.getExpensesByStatus(statusCheck.toUpperCase()));
+            }
             context.status(200);
             context.result(json);
 
         });
 
-//        GET /expenses?status=pending
-
 //        GET /expenses/12
+        api.get("/expenses/{id}", context -> {
+
+            Gson gson = new Gson();
+            int id = Integer.parseInt(context.pathParam("id"));
+            try {
+                String json = gson.toJson(expenseService.getExpenseById(id));
+                context.status(200);
+                context.result(json);
+            }catch (ObjectNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
+            }
+        });
 
 //        PUT /expenses/15
 

@@ -36,4 +36,14 @@ public class ExpenseDaoTests {
         Assertions.assertEquals(testEmployeeId, expenses.get(testIndex).getEmployeeId());
     }
 
+    @Test
+    void get_expense_by_id_test(){
+
+        int testId = 4;
+
+        Expense expense = expenseDAO.getExpenseById(testId);
+
+        Assertions.assertEquals(testId, expense.getExpenseId());
+    }
+
 }

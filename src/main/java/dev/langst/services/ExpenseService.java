@@ -10,4 +10,7 @@ public interface ExpenseService {
 
     List<Expense> getAllExpenses();
 
+    List<Expense> getExpensesByStatus(String status);
+
+    Expense getExpenseById(int id);
 }
