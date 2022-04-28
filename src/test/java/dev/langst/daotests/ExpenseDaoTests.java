@@ -29,7 +29,7 @@ public class ExpenseDaoTests {
     void get_all_expenses_test(){
 
         int testIndex = 7;
-        int testEmployeeId = 1;
+        int testEmployeeId = 4;
 
         List<Expense> expenses = expenseDAO.getAllExpenses();
 
