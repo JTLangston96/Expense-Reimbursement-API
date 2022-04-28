@@ -5,6 +5,7 @@ import dev.langst.data.EmployeeDAOPostgres;
 import dev.langst.data.ExpenseDAOPostgres;
 import dev.langst.entities.Employee;
 import dev.langst.entities.Expense;
+import dev.langst.exceptions.InvalidStatusChange;
 import dev.langst.exceptions.NegativeExpense;
 import dev.langst.exceptions.ObjectNotFound;
 import dev.langst.services.EmployeeService;
@@ -150,6 +151,28 @@ public class Api {
         });
 
 //        PUT /expenses/15
+        api.put("/expenses/{id}", context -> {
+
+            Gson gson = new Gson();
+            String body = context.body();
+            Expense expense = gson.fromJson(body, Expense.class);
+            int id = Integer.parseInt(context.pathParam("id"));
+            expense.setExpenseId(id);
+            try {
+                Expense updatedExpense = expenseService.updateExpense(expense);
+                context.status(200);
+                context.result("The following employee has been updated: \"" + updatedExpense + "\"");
+            }
+            catch (ObjectNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
+            }
+            catch (InvalidStatusChange e){
+                context.status(400);
+                context.result(e.getMessage());
+            }
+
+        });
 
 //        PATCH /expenses/20/approve
 

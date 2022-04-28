@@ -2,6 +2,7 @@ package dev.langst.services;
 
 import dev.langst.data.ExpenseDAO;
 import dev.langst.entities.Expense;
+import dev.langst.exceptions.InvalidStatusChange;
 import dev.langst.exceptions.NegativeExpense;
 import dev.langst.exceptions.ObjectNotFound;
 
@@ -47,6 +48,23 @@ public class ExpenseServiceImpl implements ExpenseService{
         }
         else{
             return expense;
+        }
+    }
+
+    @Override
+    public Expense updateExpense(Expense expense) {
+        Expense oldExpense = expenseDAO.getExpenseById(expense.getExpenseId());
+
+        if(oldExpense == null){
+            throw new ObjectNotFound();
+        }
+        else if(!oldExpense.getStatus().equals("PENDING")){
+            throw new InvalidStatusChange();
+        }
+        else{
+            oldExpense.setEmployeeId(expense.getEmployeeId());
+            oldExpense.setAmount(expense.getAmount());
+            return expenseDAO.updateExpense(oldExpense);
         }
     }
 }
