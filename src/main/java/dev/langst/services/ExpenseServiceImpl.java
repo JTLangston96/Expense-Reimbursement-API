@@ -5,10 +5,8 @@ import dev.langst.entities.Expense;
 import dev.langst.exceptions.NegativeExpense;
 import dev.langst.exceptions.ObjectNotFound;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ExpenseServiceImpl implements ExpenseService{
 

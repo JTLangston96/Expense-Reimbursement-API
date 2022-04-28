@@ -13,8 +13,6 @@ import dev.langst.services.ExpenseService;
 import dev.langst.services.ExpenseServiceImpl;
 import io.javalin.Javalin;
 
-import java.util.Locale;
-
 public class Api {
 
     public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOPostgres());

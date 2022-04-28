@@ -11,6 +11,11 @@ import java.util.List;
 
 public class ExpenseDAOPostgres implements ExpenseDAO {
 
+    private static final String EXPENSE_ID = "expense_id";
+    private static final String EMPLOYEE_ID = "employee_id";
+    private static final String STATUS = "status";
+    private static final String AMOUNT = "amount";
+
     private static final Logger logger = LogManager.getLogger(ExpenseDAOPostgres.class);
 
 
@@ -30,7 +35,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
 
-            int generatedId = rs.getInt("expense_id");
+            int generatedId = rs.getInt(EXPENSE_ID);
             expense.setExpenseId(generatedId);
 
             return expense;
@@ -59,10 +64,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
             Expense expense = new Expense();
 
-            expense.setExpenseId(rs.getInt("expense_id"));
-            expense.setEmployeeId(rs.getInt("employee_id"));
-            expense.setStatus(rs.getString("status"));
-            expense.setAmount(rs.getDouble("amount"));
+            expense.setExpenseId(rs.getInt(EXPENSE_ID));
+            expense.setEmployeeId(rs.getInt(EMPLOYEE_ID));
+            expense.setStatus(rs.getString(STATUS));
+            expense.setAmount(rs.getDouble(AMOUNT));
 
             return expense;
 
@@ -91,10 +96,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
             List<Expense> expenses = new ArrayList<>();
             while(rs.next()){
-                int expenseId = rs.getInt("expense_id");
-                int employeeId = rs.getInt("employee_id");
-                String status = rs.getString("status");
-                double amount = rs.getDouble("amount");
+                int expenseId = rs.getInt(EXPENSE_ID);
+                int employeeId = rs.getInt(EMPLOYEE_ID);
+                String status = rs.getString(STATUS);
+                double amount = rs.getDouble(AMOUNT);
 
                 Expense expense = new Expense(employeeId, status, amount);
                 expense.setExpenseId(expenseId);
