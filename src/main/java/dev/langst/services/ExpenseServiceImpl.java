@@ -7,11 +7,13 @@ import dev.langst.exceptions.NegativeExpense;
 import dev.langst.exceptions.ObjectNotFound;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ExpenseServiceImpl implements ExpenseService{
 
+    private static final String PENDING = "PENDING";
+    private static final String APPROVE = "APPROVE";
+    private static final String DENY = "DENY";
     private ExpenseDAO expenseDAO;
 
     public ExpenseServiceImpl(ExpenseDAO expenseDAO) {
@@ -23,7 +25,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         if(expense.getAmount() <= 0){
             throw new NegativeExpense();
         }
-        expense.setStatus("PENDING");
+        expense.setStatus(PENDING);
         return expenseDAO.createExpense(expense);
     }
 
@@ -59,7 +61,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         if(oldExpense == null){
             throw new ObjectNotFound();
         }
-        else if(!oldExpense.getStatus().equals("PENDING")){
+        else if(!oldExpense.getStatus().equals(PENDING)){
             throw new InvalidStatusChange();
         }
         else{
@@ -75,8 +77,8 @@ public class ExpenseServiceImpl implements ExpenseService{
         if(expense == null){
             throw new ObjectNotFound();
         }
-        else if(!expense.getStatus().equals("PENDING") ||
-                (!status.equalsIgnoreCase("approve") && !status.equalsIgnoreCase("deny"))){
+        else if(!expense.getStatus().equals(PENDING) ||
+                (!status.equalsIgnoreCase(APPROVE) && !status.equalsIgnoreCase(DENY))){
             throw new InvalidStatusChange();
         }
         else{

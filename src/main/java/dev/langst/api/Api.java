@@ -177,10 +177,10 @@ public class Api {
 //        PATCH /expenses/20/approve
 //        PATCH /expenses/20/deny
         api.patch("/expenses/{id}/{status}", context -> {
-            Gson gson = new Gson();
-            String body = context.body();
+
             int id = Integer.parseInt(context.pathParam("id"));
             String status = context.pathParam("status");
+
             try {
                 Expense updatedExpense = expenseService.updateStatus(id, status);
                 context.status(200);
