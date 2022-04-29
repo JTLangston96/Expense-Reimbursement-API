@@ -86,4 +86,17 @@ public class ExpenseServiceImpl implements ExpenseService{
             return this.expenseDAO.updateExpense(expense);
         }
     }
+
+    @Override
+    public boolean deleteExpense(int id) {
+        Expense expense = this.expenseDAO.getExpenseById(id);
+        if(expense == null){
+            throw new ObjectNotFound();
+        }
+        else if(!expense.getStatus().equalsIgnoreCase(PENDING)){
+            throw new InvalidStatusChange();
+        }
+
+        return this.expenseDAO.deleteExpense(id);
+    }
 }

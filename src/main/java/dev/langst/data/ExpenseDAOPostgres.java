@@ -148,6 +148,22 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
     @Override
     public boolean deleteExpense(int id) {
-        return false;
+
+        String sql = "delete from expense where expense_id = ?";
+
+        try(Connection conn = ConnectionUtil.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+            ps.setInt(1, id);
+
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+
+            return rs.next();
+        } catch (SQLException e) {
+            logger.error(String.format("There was an error deleting an Expense with the Id %d.",
+                    id));
+            return false;
+        }
     }
 }

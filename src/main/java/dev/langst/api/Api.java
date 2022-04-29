@@ -197,6 +197,21 @@ public class Api {
         });
 
 //        DELETE /expenses/19
+        api.delete("/expenses/{id}", context -> {
+
+            try{
+                int id = Integer.parseInt(context.pathParam("id"));
+                expenseService.deleteExpense(id);
+                context.status(201);
+                context.result(String.format("The expense with ID %d has been deleted", id));
+            }catch (ObjectNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
+            }catch (InvalidStatusChange e){
+                context.status(400);
+                context.result(e.getMessage());
+            }
+        });
 
 
 
