@@ -132,8 +132,6 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
 
-            Expense updatedExpense = new Expense();
-
             expense.setExpenseId(rs.getInt(EXPENSE_ID));
             expense.setEmployeeId(rs.getInt(EMPLOYEE_ID));
             expense.setStatus(rs.getString(STATUS));

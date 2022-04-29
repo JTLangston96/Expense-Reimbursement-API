@@ -7,6 +7,7 @@ import dev.langst.exceptions.NegativeExpense;
 import dev.langst.exceptions.ObjectNotFound;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ExpenseServiceImpl implements ExpenseService{
@@ -65,6 +66,22 @@ public class ExpenseServiceImpl implements ExpenseService{
             oldExpense.setEmployeeId(expense.getEmployeeId());
             oldExpense.setAmount(expense.getAmount());
             return expenseDAO.updateExpense(oldExpense);
+        }
+    }
+
+    @Override
+    public Expense updateStatus(int id, String status) {
+        Expense expense = this.expenseDAO.getExpenseById(id);
+        if(expense == null){
+            throw new ObjectNotFound();
+        }
+        else if(!expense.getStatus().equals("PENDING") ||
+                (!status.equalsIgnoreCase("approve") && !status.equalsIgnoreCase("deny"))){
+            throw new InvalidStatusChange();
+        }
+        else{
+            expense.setStatus(status.toUpperCase());
+            return this.expenseDAO.updateExpense(expense);
         }
     }
 }

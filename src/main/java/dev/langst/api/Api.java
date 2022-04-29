@@ -175,8 +175,26 @@ public class Api {
         });
 
 //        PATCH /expenses/20/approve
-
 //        PATCH /expenses/20/deny
+        api.patch("/expenses/{id}/{status}", context -> {
+            Gson gson = new Gson();
+            String body = context.body();
+            int id = Integer.parseInt(context.pathParam("id"));
+            String status = context.pathParam("status");
+            try {
+                Expense updatedExpense = expenseService.updateStatus(id, status);
+                context.status(200);
+                context.result("The following expense has been updated: \"" + updatedExpense + "\"");
+            }
+            catch (ObjectNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
+            }
+            catch (InvalidStatusChange e){
+                context.status(400);
+                context.result(e.getMessage());
+            }
+        });
 
 //        DELETE /expenses/19
 

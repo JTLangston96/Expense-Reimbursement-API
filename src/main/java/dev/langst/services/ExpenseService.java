@@ -15,4 +15,6 @@ public interface ExpenseService {
     Expense getExpenseById(int id);
 
     Expense updateExpense(Expense expense);
+
+    Expense updateStatus(int id, String status);
 }
