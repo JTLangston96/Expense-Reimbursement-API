@@ -12,6 +12,8 @@ public interface ExpenseService {
 
     List<Expense> getExpensesByStatus(String status);
 
+    List<Expense> getExpensesByEmployeeId(int id);
+
     Expense getExpenseById(int id);
 
     Expense updateExpense(Expense expense);

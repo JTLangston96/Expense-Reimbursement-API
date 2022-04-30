@@ -43,6 +43,14 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     @Override
+    public List<Expense> getExpensesByEmployeeId(int id) {
+        return expenseDAO.getAllExpenses()
+                .stream()
+                .filter(e -> e.getEmployeeId() == id)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Expense getExpenseById(int id) {
         Expense expense = this.expenseDAO.getExpenseById(id);
 

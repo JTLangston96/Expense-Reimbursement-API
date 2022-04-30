@@ -218,8 +218,36 @@ public class Api {
             //        NESTED ROUTES        //
 
 //        GET /employees/120/expenses
+        api.get("/employees/{id}/expenses", context -> {
 
+            Gson gson = new Gson();
+            int id = Integer.parseInt(context.pathParam("id"));
+            String json = gson.toJson(expenseService.getExpensesByEmployeeId(id));
+            context.status(200);
+            context.result(json);
+        });
+        
 //        POST /employees/120/expenses
+        api.post("/employees/{id}/expenses", context -> {
+            try{
+                int id = Integer.parseInt(context.pathParam("id"));
+                String body = context.body();
+                Gson gson = new Gson();
+
+                Expense expense = gson.fromJson(body, Expense.class);
+                expense.setEmployeeId(id);
+                Expense savedExpense = expenseService.createExpense(expense);
+
+                context.status(201);
+                context.result("The following expense \"" + savedExpense.toString() +
+                        "\" has been created and is now pending approval");
+            }catch (NegativeExpense e){
+                context.status(400);
+                context.result(e.getMessage());
+            }
+
+        });
+
 
         api.start(7000);
     }

@@ -79,11 +79,6 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     }
 
     @Override
-    public List<Expense> getExpenseByEmployeeId(int employeeId) {
-        return new ArrayList<>();
-    }
-
-    @Override
     public List<Expense> getAllExpenses() {
 
         String sql = "select * from expense";
