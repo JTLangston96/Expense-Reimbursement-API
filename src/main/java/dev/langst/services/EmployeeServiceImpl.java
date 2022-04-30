@@ -2,6 +2,7 @@ package dev.langst.services;
 
 import dev.langst.data.EmployeeDAO;
 import dev.langst.entities.Employee;
+import dev.langst.exceptions.ObjectNotFound;
 
 import java.util.List;
 
@@ -20,7 +21,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(int id) {
-        return employeeDAO.getEmployeeById(id);
+        Employee foundEmployee = employeeDAO.getEmployeeById(id);
+        if(foundEmployee == null){
+            throw new ObjectNotFound();
+        }
+        else {
+            return foundEmployee;
+        }
     }
 
     @Override
@@ -30,11 +37,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        return employeeDAO.updateEmployee(employee);
+        Employee foundEmployee = employeeDAO.updateEmployee(employee);
+        if(foundEmployee == null){
+            throw new ObjectNotFound();
+        }
+        else {
+            return foundEmployee;
+        }
     }
 
     @Override
     public boolean deleteEmployee(int id) {
-        return employeeDAO.deleteEmployee(id);
+        boolean foundEmployee = employeeDAO.deleteEmployee(id);
+        if(!foundEmployee){
+            throw new ObjectNotFound();
+        }
+        else {
+            return true;
+        }
     }
 }
