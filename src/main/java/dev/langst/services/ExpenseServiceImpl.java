@@ -30,7 +30,13 @@ public class ExpenseServiceImpl implements ExpenseService{
             throw new NegativeExpense();
         }
         expense.setStatus(PENDING);
-        return expenseDAO.createExpense(expense);
+        Expense returnedExpense = expenseDAO.createExpense(expense);
+        if(returnedExpense == null){
+            throw new ObjectNotFound();
+        }
+        else{
+            return returnedExpense;
+        }
     }
 
     @Override

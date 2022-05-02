@@ -251,6 +251,9 @@ public class Api {
             }catch (NegativeExpense e){
                 context.status(400);
                 context.result(e.getMessage());
+            }catch (ObjectNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
             }
 
         });
