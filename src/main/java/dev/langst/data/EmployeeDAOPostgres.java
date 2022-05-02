@@ -140,6 +140,8 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             employee.setFirstName(firstName);
             employee.setLastName(lastname);
 
+            logger.info(String.format("An employee has been updated in the database with the ID: %d", returnedId));
+
             return employee;
 
         } catch (SQLException e) {
@@ -165,6 +167,8 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             rs.next();
 
             rs.getInt(EMPLOYEE_ID);
+
+            logger.info(String.format("An employee has been deleted in the database with the ID: %d", id));
 
             return true;
 
