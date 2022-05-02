@@ -83,7 +83,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public List<Expense> getAllExpenses() {
 
-        String sql = "select * from expense";
+        String sql = "select * from expense order by expense_id asc";
 
         try(Connection conn = ConnectionUtil.createConnection();
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -136,6 +136,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
             logger.info(String.format("An expense has been updated in the database with the ID: %d",
                     expense.getExpenseId()));
+            logger.debug(expense);
 
             return expense;
 
