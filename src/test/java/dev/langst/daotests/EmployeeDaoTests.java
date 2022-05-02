@@ -83,10 +83,4 @@ public class EmployeeDaoTests {
         Assertions.assertTrue(result);
     }
 
-    @Test
-    void negative_create_employee_test(){
-        Employee zeus = new Employee();
-        Employee savedEmployee = employeeDAO.createEmployee(zeus);
-        Assertions.assertEquals(null, savedEmployee);
-    }
 }

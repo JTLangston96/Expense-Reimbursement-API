@@ -1,8 +1,10 @@
-package dev.langst.services;
+package dev.langst.servicestests;
 
 import dev.langst.data.EmployeeDAO;
 import dev.langst.data.EmployeeDAOPostgres;
 import dev.langst.entities.Employee;
+import dev.langst.services.EmployeeService;
+import dev.langst.services.EmployeeServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
