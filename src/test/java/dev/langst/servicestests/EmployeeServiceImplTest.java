@@ -25,7 +25,7 @@ class EmployeeServiceImplTest {
     EmployeeService employeeService = new EmployeeServiceImpl(employeeDAOMock);
 
     @Test
-    void createEmployee() {
+    void createEmployeeTest() {
         Employee testEmployee = new Employee("Mars", "Jupiter");
         testEmployee.setEmployeeId(1);
 
@@ -36,7 +36,7 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void getEmployeeById() {
+    void getEmployeeByIdTest() {
         Employee testEmployee = new Employee("Mars", "Jupiter");
         int testId = 5;
         testEmployee.setEmployeeId(testId);
@@ -48,7 +48,7 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void getAllEmployees() {
+    void getAllEmployeesTest() {
         List<Employee> testEmployees = new ArrayList<>();
         testEmployees.add(new Employee("Mars", "Jupiter"));
 
@@ -59,7 +59,7 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void updateEmployee() {
+    void updateEmployeeTest() {
         Employee testEmployee = new Employee("Mars", "Jupiter");
 
         when(employeeDAOMock.updateEmployee(testEmployee)).thenReturn(testEmployee);
@@ -69,7 +69,7 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void deleteEmployee() {
+    void deleteEmployeeTest() {
         int testId = 0;
 
         when(employeeDAOMock.deleteEmployee(testId)).thenReturn(true);

@@ -24,7 +24,7 @@ class ExpenseServiceImplTest {
     ExpenseService expenseService = new ExpenseServiceImpl(expenseDAOMock);
 
     @Test
-    void createExpense() {
+    void createExpenseTest() {
         Expense testExpense = new Expense();
         testExpense.setExpenseId(1);
         testExpense.setAmount(200.21);
@@ -36,7 +36,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void getAllExpenses() {
+    void getAllExpensesTest() {
         List<Expense> testExpenses = new ArrayList<>();
         testExpenses.add(new Expense());
 
@@ -47,7 +47,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void getExpensesByStatus() {
+    void getExpensesByStatusTest() {
         final String ACCEPTED = "ACCEPTED";
         List<Expense> testExpenses = new ArrayList<>();
         testExpenses.add(new Expense());
@@ -60,7 +60,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void getExpensesByEmployeeId() {
+    void getExpensesByEmployeeIdTest() {
         final int TEST_EMPLOYEE_ID = 1;
         List<Expense> testExpenses = new ArrayList<>();
         testExpenses.add(new Expense());
@@ -73,7 +73,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void getExpenseById() {
+    void getExpenseByIdTest() {
         final int TEST_EXPENSE_ID = 1;
         Expense testExpense = new Expense();
         testExpense.setExpenseId(TEST_EXPENSE_ID);
@@ -85,7 +85,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void updateExpense() {
+    void updateExpenseTest() {
         Expense testExpense = new Expense(1, "PENDING", 32.45);
         testExpense.setExpenseId(0);
 
@@ -97,7 +97,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void updateStatus() {
+    void updateStatusTest() {
         Expense testExpense = new Expense(1, "PENDING", 32.45);
         Expense afterUpdate = new Expense(1, "APPROVE", 32.45);
         testExpense.setExpenseId(0);
@@ -110,7 +110,7 @@ class ExpenseServiceImplTest {
     }
 
     @Test
-    void deleteExpense() {
+    void deleteExpenseTest() {
         final int TEST_EXPENSE_ID = 0;
         Expense testExpense = new Expense(0, "PENDING", 11.11);
         testExpense.setExpenseId(TEST_EXPENSE_ID);
