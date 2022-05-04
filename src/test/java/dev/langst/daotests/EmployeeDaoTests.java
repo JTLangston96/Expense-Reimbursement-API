@@ -35,22 +35,19 @@ public class EmployeeDaoTests {
     }
 
     @Test
-    void get_all_employees(){
+    void get_all_employees_test(){
         //These employees should always be in the database to test against
         //Change the hardcoded variables below if otherwise
-        int testId1 = 1;
-        int index1 = 0;
-        int testId2 = 3;
-        int index2 = 2;
+        int testIndex = 2;
+        int testEmployeeId = 3;
 
         List<Employee> resultList = employeeDAO.getAllEmployees();
 
-        Assertions.assertEquals(testId1, resultList.get(index1).getEmployeeId());
-        Assertions.assertEquals(testId2, resultList.get(index2).getEmployeeId());
+        Assertions.assertEquals(testEmployeeId, resultList.get(testIndex).getEmployeeId());
     }
 
     @Test
-    void update_employee(){
+    void update_employee_test(){
         //This employee should already be in the database.
         //If not then change the hardcoded variables below
         int testId = 6;
@@ -76,7 +73,7 @@ public class EmployeeDaoTests {
     }
 
     @Test
-    void delete_employee(){
+    void delete_employee_test(){
         //Must create an employee first to delete
         //May fail if the create employee method in EmployeeDAO fails
         Employee zeus = new Employee("Thor", "Thunder");
@@ -86,10 +83,4 @@ public class EmployeeDaoTests {
         Assertions.assertTrue(result);
     }
 
-    @Test
-    void negative_create_employee_test(){
-        Employee zeus = new Employee();
-        Employee savedEmployee = employeeDAO.createEmployee(zeus);
-        Assertions.assertEquals(null, savedEmployee);
-    }
 }

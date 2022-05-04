@@ -15,6 +15,7 @@ public class ConnectionUtil {
 
         try {
             Connection conn = DriverManager.getConnection(System.getenv("EXPENSEDB"));
+            logger.info("Successfully connected to the Database.");
             return conn;
         }
         catch (SQLException e){

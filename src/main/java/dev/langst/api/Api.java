@@ -23,6 +23,13 @@ public class Api {
 
         Javalin api = Javalin.create();
 
+        api.get("/", context -> {
+
+            context.status(200);
+            context.result("Application is healthy!");
+
+        });
+
             //        EMPLOYEES         //
 
 //        POST /employees
@@ -226,7 +233,7 @@ public class Api {
             context.status(200);
             context.result(json);
         });
-        
+
 //        POST /employees/120/expenses
         api.post("/employees/{id}/expenses", context -> {
             try{
@@ -244,12 +251,15 @@ public class Api {
             }catch (NegativeExpense e){
                 context.status(400);
                 context.result(e.getMessage());
+            }catch (ObjectNotFound e){
+                context.status(404);
+                context.result(e.getMessage());
             }
 
         });
 
 
-        api.start(7000);
+        api.start(5000);
     }
 
 }

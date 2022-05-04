@@ -38,6 +38,8 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             int generatedId = rs.getInt(EXPENSE_ID);
             expense.setExpenseId(generatedId);
 
+            logger.info(String.format("An expense has been created in the database with the ID: %d", generatedId));
+
             return expense;
 
         } catch (SQLException e) {
@@ -81,7 +83,7 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public List<Expense> getAllExpenses() {
 
-        String sql = "select * from expense";
+        String sql = "select * from expense order by expense_id asc";
 
         try(Connection conn = ConnectionUtil.createConnection();
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -132,6 +134,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
             expense.setStatus(rs.getString(STATUS));
             expense.setAmount(rs.getDouble(AMOUNT));
 
+            logger.info(String.format("An expense has been updated in the database with the ID: %d",
+                    expense.getExpenseId()));
+            logger.debug(expense);
+
             return expense;
 
         } catch (SQLException e) {
@@ -153,6 +159,9 @@ public class ExpenseDAOPostgres implements ExpenseDAO {
 
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
+
+            logger.info(String.format("An expense has been deleted in the database with the ID: %d",
+                    id));
 
             return rs.next();
         } catch (SQLException e) {
