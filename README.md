@@ -27,7 +27,9 @@ To-do list:
 ## Getting Started
    
 `git clone https://github.com/JTLangston96/Expense-Reimbursement-API.git`
+
 The application relies on an environment variable named `EXPENSEDB` that should be a url route to your database. The only supported database language for this application is PostgreSQL.
+
 The app runs on port 5000 so you can build the executable jar with `mvn package` while in the main directory and run or host the jar on whatever service you wish, like AWS.
 
 ## Usage
