@@ -22,7 +22,7 @@ Employees and any expenses connected to the employees may be created using the A
 
 To-do list:
 * Refactor DAOs and Services to reduce repeated code.
-* Implement Docker.
+* Create negative test cases for the service layer to increase code coverage.
 
 ## Getting Started
    
