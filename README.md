@@ -4,7 +4,8 @@ The Employee Reimbursement System (ERS) is REST API that helps manage the proces
 
 Employees and any expenses connected to the employees may be created using the API. There are some constraints to keep in mind. Every expense may only have a single employee as the issuer, and once an expense is approved or denied it may not be edited or deleted. Negative expenses are also not allowed to be created.
 
-#Technologies Used
+# Technologies Used
+
 *Javalin
 *PostgreSQL
 *AWS Services
