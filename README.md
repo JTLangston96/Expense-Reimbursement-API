@@ -6,8 +6,4 @@ Employees and any expenses connected to the employees may be created using the A
 
 # Technologies Used
 
-*Javalin
-*PostgreSQL
-*AWS Services
-*JUnit
-*Log4j
+Javalin, PostgreSQL, AWS Services, JUnit, Log4j
