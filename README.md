@@ -1,5 +1,6 @@
 # Expense-Reimbursement-API
 
+## Overview
 The Employee Reimbursement System (ERS) is REST API that helps manage the process of reimbursing employees for expenses. Employees can be created and edited via the API. Expenses for employees can be added and updated to pending and approved. Reviewed expenses can not be edited.
 
 ## Technologies Used
@@ -18,12 +19,10 @@ The Employee Reimbursement System (ERS) is REST API that helps manage the proces
 * Create an expense tied to a single employee.
 * Edit and delete employees and expenses while following constraints.
 
-To-do list:
-* Refactor DAOs and Services to reduce repeated code.
-* Create negative test cases for the service layer to increase code coverage.
-
 ## Getting Started
-   
+
+Clone the repo with the following command:
+  
 `git clone https://github.com/JTLangston96/Expense-Reimbursement-API.git`
 
 The application relies on an environment variable named `EXPENSEDB` that should be a url route to your database. The only supported database language for this application is PostgreSQL.
